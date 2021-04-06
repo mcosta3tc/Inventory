@@ -20,7 +20,5 @@ public class CategoryRepositoryTest {
     @Test
     public void testCreateCategory() {
         Category savedCategory = repository.save(new Category("Electronics"));
-
-        ass
     }
 }
