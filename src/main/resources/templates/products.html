@@ -24,22 +24,30 @@
                 <th>
                     Category
                 </th>
+                <th>
+
+                </th>
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="products : ${productList}">
+            <th:block th:each="product : ${productList}">
                 <tr>
                     <td>
-                        [[${products.id}]]
+                        [[${product.id}]]
                     </td>
                     <td>
-                        [[${products.name}]]
+                        [[${product.name}]]
                     </td>
                     <td>
-                        [[${products.price}]] €
+                        [[${product.price}]] €
                     </td>
                     <td>
-                        [[${products.category.name}]]
+                        [[${product.category.name}]]
+                    </td>
+                    <td>
+                        <a th:href="@{'/products/edit/' + ${product.id}}">
+                            Edit
+                        </a>
                     </td>
                 </tr>
             </th:block>

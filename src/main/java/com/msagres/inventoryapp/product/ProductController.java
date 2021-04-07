@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 public class ProductController {
@@ -20,7 +23,7 @@ public class ProductController {
     private CategoryRepository categoryRepository;
 
     @GetMapping("/products/new")
-    public String showNewProductForm(Model model){
+    public String showNewProductForm(Model model) {
         List<Category> categoryList = categoryRepository.findAll();
         model.addAttribute("product", new Product());
         model.addAttribute("categoryList", categoryList);
@@ -28,15 +31,26 @@ public class ProductController {
     }
 
     @PostMapping("/products/save")
-    public String saveProduct(Product product){
+    public String saveProduct(Product product) {
         productRepository.save(product);
         return "redirect:/products";
     }
 
     @GetMapping("/products")
-    public String listProducts(Model model){
+    public String listProducts(Model model) {
         List<Product> productList = productRepository.findAll();
         model.addAttribute("productList", productList);
         return "products";
+    }
+
+    @GetMapping("/products/edit/{id}")
+    public String showEditProductForm(@PathVariable("id") UUID id, Model model) {
+        Product product = productRepository.findById(id).get();
+        model.addAttribute("product", product);
+
+        List<Category> categoryList = categoryRepository.findAll();
+        model.addAttribute("categoryList", categoryList);
+
+        return "product_form";
     }
 }
