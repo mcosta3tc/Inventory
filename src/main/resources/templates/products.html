@@ -25,7 +25,7 @@
                     Category
                 </th>
                 <th>
-
+                    Modify
                 </th>
             </tr>
             </thead>
@@ -45,8 +45,11 @@
                         [[${product.category.name}]]
                     </td>
                     <td>
-                        <a th:href="@{'/products/edit/' + ${product.id}}">
+                        <a class="btn btn-primary" th:href="@{'/products/edit/' + ${product.id}}">
                             Edit
+                        </a>
+                        <a class="btn btn-danger" th:href="@{'/products/delete/' + ${product.id}}">
+                            Delete
                         </a>
                     </td>
                 </tr>
